@@ -155,6 +155,19 @@ export default function App() {
             areaHectares={areaNeeded}
             safType={selectedSaf}
             isWholePlane={isWholePlane}
+            onCenterChange={(newCenter) => {
+                // Update the "current city" to be custom coordinates so we don't snap back
+                // We can use a special "Custom Location" state or just update the coords
+                // But our current structure uses a name -> coord map.
+                // Let's just update the internal state in MapView? 
+                // No, the issue is that App.tsx passes `currentCityCoords` which is derived from `currentCityName`.
+                // If we drag, we need to update `currentCityName` to something that reflects "Custom" 
+                // AND update the coordinates backing it.
+                
+                // Actually, simpler: Let's add a `customLocation` state to App.tsx
+                setUserLocation(newCenter);
+                setCurrentCityName('My Location');
+            }}
         />
       </div>
       

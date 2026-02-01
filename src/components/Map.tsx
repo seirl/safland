@@ -23,6 +23,7 @@ interface MapViewProps {
   areaHectares: number;
   safType: SafType;
   isWholePlane: boolean;
+  onCenterChange: (center: [number, number]) => void;
 }
 
 // Component to handle map updates when center changes
@@ -64,7 +65,7 @@ function ZoomToFit({ position, radius }: { position: [number, number], radius: n
     );
 }
 
-export default function MapView({ center, areaHectares, safType, isWholePlane }: MapViewProps) {
+export default function MapView({ center, areaHectares, safType, isWholePlane, onCenterChange }: MapViewProps) {
   // Calculate radius in meters
   // Area (ha) * 10,000 = Area (m2)
   // Area = PI * r^2  => r = sqrt(Area / PI)
@@ -81,12 +82,12 @@ export default function MapView({ center, areaHectares, safType, isWholePlane }:
   }, [center]);
 
   // Determine circle color based on SAF type
-  const circleOptions = { 
+  const circleOptions = useMemo(() => ({ 
     color: safType.color, 
     fillColor: safType.color, 
     fillOpacity: 0.4,
     weight: 2
-  };
+  }), [safType]);
 
   return (
     <div className="h-full w-full relative z-0">
@@ -109,7 +110,10 @@ export default function MapView({ center, areaHectares, safType, isWholePlane }:
             radius={radiusMeters} 
             options={circleOptions}
             label={`${areaHectares < 0.01 ? '< 0.01' : areaHectares.toFixed(2)} ha`}
-            onPositionChange={setPosition}
+            onPositionChange={(newPos) => {
+                setPosition(newPos);
+                onCenterChange(newPos);
+            }}
         />
 
         <ZoomToFit position={position} radius={radiusMeters} />
@@ -148,9 +152,7 @@ function DraggableArea({
                 if (marker) {
                     const newPos = marker.getLatLng();
                     setPos(newPos);
-                    // We don't call onPositionChange on every drag event to avoid excessive re-renders/calcs in parent if it was expensive
-                    // But here we might want to update the ZoomToFit target
-                    onPositionChange([newPos.lat, newPos.lng]);
+                    // Do NOT update parent on every frame to avoid re-render loops/artifacts
                 }
             },
             dragend(e: any) {
