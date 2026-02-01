@@ -1,5 +1,5 @@
 import React from 'react';
-import { Plane, Users, Leaf, Info, Droplets, MapPin, Armchair, Repeat, Wind, DollarSign } from 'lucide-react';
+import { Plane, Users, Leaf, Info, Droplets, MapPin, Armchair, Repeat, Wind, DollarSign, ArrowRight } from 'lucide-react';
 import { SAF_TYPES, SafType, cn, FLIGHT_CLASSES, FlightClass } from '../lib/utils';
 import * as Motion from 'motion/react-client';
 
@@ -79,21 +79,37 @@ export default function Controls({
         </div>
         
         <div className="space-y-3">
+            {/* Trip Type Segmented Control */}
+            <div className="flex p-1 bg-stone-100 rounded-lg">
+                <button 
+                    onClick={() => setIsRoundtrip(false)}
+                    className={cn(
+                        "flex-1 py-1.5 text-xs font-medium rounded-md transition-all flex items-center justify-center gap-2",
+                        !isRoundtrip 
+                            ? "bg-white text-stone-800 shadow-sm ring-1 ring-black/5" 
+                            : "text-stone-500 hover:text-stone-700"
+                    )}
+                >
+                    <ArrowRight className="w-3 h-3" />
+                    One-way
+                </button>
+                <button 
+                    onClick={() => setIsRoundtrip(true)}
+                    className={cn(
+                        "flex-1 py-1.5 text-xs font-medium rounded-md transition-all flex items-center justify-center gap-2",
+                        isRoundtrip 
+                            ? "bg-white text-stone-800 shadow-sm ring-1 ring-black/5" 
+                            : "text-stone-500 hover:text-stone-700"
+                    )}
+                >
+                    <Repeat className="w-3 h-3" />
+                    Roundtrip
+                </button>
+            </div>
+
             <div>
                 <div className="flex items-center justify-between mb-1">
                     <label className="text-xs font-medium text-stone-500">Flight Distance (one-way)</label>
-                    <button 
-                        onClick={() => setIsRoundtrip(!isRoundtrip)}
-                        className={cn(
-                            "flex items-center gap-1.5 text-[10px] font-medium px-2 py-0.5 rounded-full border transition-colors",
-                            isRoundtrip 
-                                ? "bg-blue-50 text-blue-700 border-blue-200" 
-                                : "bg-stone-50 text-stone-500 border-stone-200 hover:border-stone-300"
-                        )}
-                    >
-                        <Repeat className="w-3 h-3" />
-                        Roundtrip
-                    </button>
                 </div>
                 <div className="flex items-center gap-3">
                     <input 
