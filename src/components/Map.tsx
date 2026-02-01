@@ -109,7 +109,7 @@ export default function MapView({ center, areaHectares, safType, isWholePlane, o
             initialPos={position} 
             radius={radiusMeters} 
             options={circleOptions}
-            label={`${areaHectares < 0.01 ? '< 0.01' : areaHectares.toFixed(2)} ha`}
+            label={`${areaHectares < 0.01 ? '< 0.01' : areaHectares.toFixed(2)} ha-years`}
             onPositionChange={(newPos) => {
                 setPosition(newPos);
                 onCenterChange(newPos);

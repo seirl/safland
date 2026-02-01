@@ -236,9 +236,17 @@ export default function Controls({
                 <MapPin className="w-5 h-5 text-emerald-600" />
             </div>
             <div>
-                <p className="text-xs text-stone-500 font-medium uppercase">Land Area Needed</p>
+                <div className="flex items-center gap-1">
+                    <p className="text-xs text-stone-500 font-medium uppercase">Land Area Needed</p>
+                    <div className="group relative">
+                        <Info className="w-3 h-3 text-stone-400 cursor-help" />
+                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-stone-800 text-white text-[10px] rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+                            "Hectare-Year" means 1 hectare of land occupied for 1 full year to produce this amount of fuel.
+                        </div>
+                    </div>
+                </div>
                 <p className="text-2xl font-bold text-stone-900 font-mono">
-                    {areaNeeded < 1 ? areaNeeded.toPrecision(2) : areaNeeded.toFixed(1)} <span className="text-sm font-sans font-normal text-stone-500">Hectares</span>
+                    {areaNeeded < 1 ? areaNeeded.toPrecision(2) : areaNeeded.toFixed(1)} <span className="text-sm font-sans font-normal text-stone-500">ha-years</span>
                 </p>
                 <p className="text-xs text-stone-500 mt-1">
                     {selectedSaf.harvestFrequency}
