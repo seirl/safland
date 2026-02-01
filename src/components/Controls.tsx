@@ -244,81 +244,111 @@ export default function Controls({
       </section>
 
       {/* Results */}
-      <section className="bg-stone-50 rounded-xl p-4 border border-stone-200 space-y-3">
-        <div className="flex items-start gap-3">
-            <div className="p-2 bg-white rounded-lg border border-stone-100 shadow-sm">
-                <Droplets className="w-5 h-5 text-blue-500" />
+      <section className="bg-stone-50 rounded-xl p-4 border border-stone-200 space-y-4">
+        
+        {/* Hero Metric: Land Area */}
+        <div className="bg-white rounded-xl p-5 border border-stone-200 shadow-sm relative overflow-visible group">
+            <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none overflow-hidden h-full w-full">
+                 <div className="absolute top-0 right-0 transform translate-x-1/4 -translate-y-1/4">
+                    <MapPin className="w-32 h-32 text-emerald-900" />
+                 </div>
             </div>
-            <div>
-                <p className="text-xs text-stone-500 font-medium uppercase">Fuel Required</p>
-                <p className="text-xl font-bold text-stone-900 font-mono">
-                    {Math.round(fuelNeeded).toLocaleString()} <span className="text-sm font-sans font-normal text-stone-500">Liters</span>
+            
+            <div className="relative z-10">
+                <div className="flex items-center gap-2 mb-2">
+                    <div className="p-1.5 bg-emerald-100 rounded-md">
+                        <MapPin className="w-4 h-4 text-emerald-700" />
+                    </div>
+                    <p className="text-sm text-stone-500 font-medium uppercase tracking-wide">Land Area Needed</p>
+                    <Info className="w-3 h-3 text-stone-300" />
+                </div>
+                
+                <div className="flex items-baseline gap-2">
+                    <p className="text-4xl font-bold text-stone-900 font-mono tracking-tight">
+                        {areaNeeded < 1 ? areaNeeded.toPrecision(2) : areaNeeded.toFixed(1)}
+                    </p>
+                    <span className="text-lg font-medium text-stone-500">ha-years</span>
+                </div>
+                
+                <p className="text-xs text-stone-400 mt-2 italic">
+                    *Equivalent to a square of {Math.round(Math.sqrt(areaNeeded * 10000))}m x {Math.round(Math.sqrt(areaNeeded * 10000))}m
                 </p>
+            </div>
+
+            {/* Land Area Tooltip - Triggers on card hover */}
+            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-stone-800 text-white text-[10px] rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-[100]">
+                "Hectare-Year" means 1 hectare of land occupied for 1 full year to produce this amount of fuel.
             </div>
         </div>
 
-        <div className="flex items-start gap-3">
-            <div className="p-2 bg-white rounded-lg border border-stone-100 shadow-sm">
-                <MapPin className="w-5 h-5 text-emerald-600" />
+        {/* Secondary Metrics */}
+        <div className="grid grid-cols-3 gap-3">
+            {/* Fuel */}
+            <div className="p-3 bg-white rounded-xl border border-stone-200 shadow-sm flex flex-col justify-between h-28">
+                <div className="flex items-start justify-between">
+                    <p className="text-[10px] text-stone-500 font-bold uppercase tracking-wider">Fuel</p>
+                    <Droplets className="w-3.5 h-3.5 text-blue-500" />
+                </div>
+                <div>
+                    <p className="text-lg font-bold text-stone-900 font-mono leading-none">
+                        {Math.round(fuelNeeded).toLocaleString()}
+                    </p>
+                    <p className="text-[10px] text-stone-400 mt-1">Liters</p>
+                </div>
             </div>
-            <div>
-                <div className="flex items-center gap-1">
-                    <p className="text-xs text-stone-500 font-medium uppercase">Land Area Needed</p>
-                    <div className="group relative">
-                        <Info className="w-3 h-3 text-stone-400 cursor-help" />
-                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-stone-800 text-white text-[10px] rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
-                            "Hectare-Year" means 1 hectare of land occupied for 1 full year to produce this amount of fuel.
-                        </div>
+
+            {/* Emissions */}
+            <div className="p-3 bg-white rounded-xl border border-stone-200 shadow-sm flex flex-col justify-between h-28 group relative">
+                <div className="flex items-start justify-between">
+                    <div className="flex items-center gap-1">
+                        <p className="text-[10px] text-stone-500 font-bold uppercase tracking-wider">CO₂ Saved</p>
+                        <Info className="w-3 h-3 text-stone-300" />
+                    </div>
+                    <Wind className="w-3.5 h-3.5 text-stone-400" />
+                </div>
+                <div>
+                    <p className="text-lg font-bold text-stone-900 font-mono leading-none">
+                        {Math.round(emissionsAvoided).toLocaleString()}
+                    </p>
+                    <p className="text-[10px] text-stone-400 mt-1">kg CO₂e</p>
+                </div>
+                {/* Emissions Tooltip */}
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-stone-800 text-white text-[10px] rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-[100]">
+                    SAF reduces lifecycle emissions by ~80% compared to fossil jet fuel. The remaining 20% comes from production, transport, and non-CO2 effects.
+                </div>
+            </div>
+
+            {/* Cost */}
+            <div className="p-3 bg-white rounded-xl border border-stone-200 shadow-sm flex flex-col justify-between h-28 group relative">
+                <div className="flex items-start justify-between">
+                    <div className="flex items-center gap-1">
+                        <p className="text-[10px] text-stone-500 font-bold uppercase tracking-wider">Cost Premium</p>
+                        <Info className="w-3 h-3 text-stone-300" />
+                    </div>
+                    <DollarSign className="w-3.5 h-3.5 text-amber-600" />
+                </div>
+                <div>
+                    <p className="text-lg font-bold text-amber-700 font-mono leading-none">
+                        +${Math.round(safCost - fossilCost).toLocaleString()}
+                    </p>
+                    <div className="flex items-center gap-1 mt-1">
+                        <span className="text-[10px] font-bold bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded-full whitespace-nowrap">
+                            {selectedSaf.priceMultiplier}x more expensive
+                        </span>
                     </div>
                 </div>
-                <p className="text-2xl font-bold text-stone-900 font-mono">
-                    {areaNeeded < 1 ? areaNeeded.toPrecision(2) : areaNeeded.toFixed(1)} <span className="text-sm font-sans font-normal text-stone-500">ha-years</span>
-                </p>
-                <p className="text-xs text-stone-500 mt-1">
-                    {selectedSaf.harvestFrequency}
-                </p>
-            </div>
-        </div>
-
-        <div className="flex items-start gap-3">
-            <div className="p-2 bg-white rounded-lg border border-stone-100 shadow-sm">
-                <Wind className="w-5 h-5 text-stone-500" />
-            </div>
-            <div>
-                <p className="text-xs text-stone-500 font-medium uppercase">Fossil Emissions Avoided</p>
-                <p className="text-xl font-bold text-stone-900 font-mono">
-                    {Math.round(emissionsAvoided).toLocaleString()} <span className="text-sm font-sans font-normal text-stone-500">kg CO₂e</span>
-                </p>
-                <p className="text-xs text-stone-400 mt-0.5">
-                    ~80% reduction vs fossil jet fuel
-                </p>
-            </div>
-        </div>
-
-        <div className="flex items-start gap-3">
-            <div className="p-2 bg-white rounded-lg border border-stone-100 shadow-sm">
-                <DollarSign className="w-5 h-5 text-amber-600" />
-            </div>
-            <div>
-                <p className="text-xs text-stone-500 font-medium uppercase">Estimated Fuel Cost</p>
-                <div className="flex items-baseline gap-2">
-                    <p className="text-xl font-bold text-stone-900 font-mono">
-                        ${Math.round(safCost).toLocaleString()}
-                    </p>
-                    <span className="text-xs text-stone-400 line-through">
-                        ${Math.round(fossilCost).toLocaleString()}
-                    </span>
+                 {/* Cost Tooltip */}
+                 <div className="absolute bottom-full right-0 mb-2 w-48 p-2 bg-stone-800 text-white text-[10px] rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-[100]">
+                    <div className="flex justify-between mb-1">
+                        <span>Fossil Jet Fuel:</span>
+                        <span>${Math.round(fossilCost).toLocaleString()}</span>
+                    </div>
+                    <div className="flex justify-between font-bold text-amber-300">
+                        <span>SAF Cost:</span>
+                        <span>${Math.round(safCost).toLocaleString()}</span>
+                    </div>
                 </div>
-                <p className="text-xs text-stone-400 mt-0.5">
-                    SAF vs Fossil Jet Fuel (~{selectedSaf.priceMultiplier}x premium)
-                </p>
             </div>
-        </div>
-        
-        <div className="mt-2 pt-2 border-t border-stone-200/50">
-             <p className="text-xs text-stone-400 italic">
-                *Equivalent to a square of {Math.round(Math.sqrt(areaNeeded * 10000))}m x {Math.round(Math.sqrt(areaNeeded * 10000))}m
-             </p>
         </div>
       </section>
 
