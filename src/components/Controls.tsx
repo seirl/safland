@@ -206,26 +206,36 @@ export default function Controls({
       {/* SAF Selection */}
       <section className="space-y-3">
         <h2 className="text-sm font-semibold text-stone-700 uppercase tracking-wider">Feedstock Source</h2>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-2 gap-3">
             {SAF_TYPES.map((saf) => (
                 <button
                     key={saf.id}
                     onClick={() => setSelectedSaf(saf)}
                     className={cn(
-                        "p-3 rounded-xl text-left border transition-all relative overflow-hidden group",
+                        "flex flex-col gap-2 p-3 rounded-xl text-left border-2 transition-all relative overflow-hidden group hover:shadow-md h-full",
                         selectedSaf.id === saf.id 
-                            ? "border-emerald-500 bg-emerald-50/50 ring-1 ring-emerald-500" 
-                            : "border-stone-200 bg-white hover:border-stone-300"
+                            ? "bg-opacity-10" 
+                            : "bg-white border-stone-100 hover:border-stone-200"
                     )}
+                    style={{ 
+                        borderColor: selectedSaf.id === saf.id ? saf.color : undefined,
+                        backgroundColor: selectedSaf.id === saf.id ? `${saf.color}15` : undefined // 15 = ~8% opacity hex
+                    }}
                 >
-                    <div className="flex items-center gap-2 mb-1">
-                        <div 
-                            className="w-3 h-3 rounded-full shadow-sm" 
-                            style={{ backgroundColor: saf.color }}
-                        />
-                        <span className="text-sm font-medium text-stone-800">{saf.name}</span>
+                    <div className="flex items-center justify-between w-full">
+                        <div className="flex items-center gap-2">
+                             <div className="text-xl">{saf.emoji}</div>
+                             <span className="text-sm font-bold text-stone-800 leading-tight">{saf.name}</span>
+                        </div>
+                        {selectedSaf.id === saf.id && (
+                            <div 
+                                className="w-2 h-2 rounded-full"
+                                style={{ backgroundColor: saf.color }}
+                            />
+                        )}
                     </div>
-                    <p className="text-[10px] text-stone-500 leading-tight">
+                    
+                    <p className="text-[10px] text-stone-500 leading-snug">
                         {saf.description}
                     </p>
                 </button>

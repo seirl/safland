@@ -88,7 +88,7 @@ export default function App() {
     <div className="flex flex-col md:flex-row w-full h-screen overflow-hidden bg-stone-100 font-sans">
       
       {/* Sidebar (Controls & Content) */}
-      <div className="w-full md:w-[480px] md:flex-shrink-0 bg-white border-r border-stone-200 flex flex-col h-[50vh] md:h-full z-20 shadow-xl md:shadow-none">
+      <div className="w-full md:w-[540px] md:flex-shrink-0 bg-white border-r border-stone-200 flex flex-col h-[50vh] md:h-full z-20 shadow-xl md:shadow-none">
         
         {/* Tab Navigation */}
         <div className="flex border-b border-stone-200">
