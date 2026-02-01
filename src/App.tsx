@@ -84,38 +84,45 @@ export default function App() {
     return CITIES[currentCityName as keyof typeof CITIES] || CITIES['Paris'];
   }, [currentCityName, userLocation]);
 
+  const isContextOpen = activeTab === 'facts';
+
   return (
     <div className="flex flex-col md:flex-row w-full h-screen overflow-hidden bg-stone-100 font-sans">
       
       {/* Sidebar (Controls & Content) */}
-      <div className="w-full md:w-[540px] md:flex-shrink-0 bg-white border-r border-stone-200 flex flex-col h-[50vh] md:h-full z-20 shadow-xl md:shadow-none">
+      <div className={cn(
+          "bg-white border-r border-stone-200 flex flex-col z-20 shadow-xl md:shadow-none transition-all duration-300 ease-in-out",
+          isContextOpen ? "w-full h-full" : "w-full md:w-[540px] h-[60vh] md:h-full flex-shrink-0"
+      )}>
         
         {/* Tab Navigation */}
-        <div className="flex border-b border-stone-200">
-            <button 
-                onClick={() => setActiveTab('calculator')}
-                className={cn(
-                    "flex-1 py-4 text-sm font-medium flex items-center justify-center gap-2 transition-colors border-b-2",
-                    activeTab === 'calculator' 
-                        ? "border-emerald-600 text-emerald-700 bg-emerald-50/30" 
-                        : "border-transparent text-stone-500 hover:text-stone-700 hover:bg-stone-50"
-                )}
-            >
-                <Calculator className="w-4 h-4" />
-                Calculator
-            </button>
-            <button 
-                onClick={() => setActiveTab('facts')}
-                className={cn(
-                    "flex-1 py-4 text-sm font-medium flex items-center justify-center gap-2 transition-colors border-b-2",
-                    activeTab === 'facts' 
-                        ? "border-blue-600 text-blue-700 bg-blue-50/30" 
-                        : "border-transparent text-stone-500 hover:text-stone-700 hover:bg-stone-50"
-                )}
-            >
-                <BookOpen className="w-4 h-4" />
-                Learn More
-            </button>
+        <div className="flex border-b border-stone-200 flex-shrink-0">
+            <div className="flex w-full md:w-[540px]">
+                <button 
+                    onClick={() => setActiveTab('calculator')}
+                    className={cn(
+                        "flex-1 py-4 text-sm font-medium flex items-center justify-center gap-2 transition-colors border-b-2",
+                        activeTab === 'calculator' 
+                            ? "border-emerald-600 text-emerald-700 bg-emerald-50/30" 
+                            : "border-transparent text-stone-500 hover:text-stone-700 hover:bg-stone-50"
+                    )}
+                >
+                    <Calculator className="w-4 h-4" />
+                    Calculator
+                </button>
+                <button 
+                    onClick={() => setActiveTab('facts')}
+                    className={cn(
+                        "flex-1 py-4 text-sm font-medium flex items-center justify-center gap-2 transition-colors border-b-2",
+                        activeTab === 'facts' 
+                            ? "border-blue-600 text-blue-700 bg-blue-50/30" 
+                            : "border-transparent text-stone-500 hover:text-stone-700 hover:bg-stone-50"
+                    )}
+                >
+                    <BookOpen className="w-4 h-4" />
+                    Context
+                </button>
+            </div>
         </div>
 
         {/* Scrollable Content Area */}
@@ -149,7 +156,10 @@ export default function App() {
       </div>
 
       {/* Map Layer */}
-      <div className="flex-1 h-[50vh] md:h-full relative z-0">
+      <div className={cn(
+          "relative z-0 transition-all duration-300",
+          isContextOpen ? "hidden" : "flex-1"
+      )}>
         <MapView 
             center={currentCityCoords as [number, number]} 
             areaHectares={areaNeeded}

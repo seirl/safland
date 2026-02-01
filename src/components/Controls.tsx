@@ -59,7 +59,7 @@ export default function Controls({
 }: ControlsProps) {
 
   return (
-    <div className="flex flex-col gap-6 p-6 pb-24">
+    <div className="flex flex-col gap-4 p-3 md:gap-6 md:p-6 pb-6">
       
       {/* Header */}
       <div>
@@ -282,7 +282,7 @@ export default function Controls({
         </div>
 
         {/* Secondary Metrics */}
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {/* Fuel */}
             <div className="p-3 bg-white rounded-xl border border-stone-200 shadow-sm flex flex-col justify-between h-28">
                 <div className="flex items-start justify-between">
@@ -319,7 +319,7 @@ export default function Controls({
             </div>
 
             {/* Cost */}
-            <div className="p-3 bg-white rounded-xl border border-stone-200 shadow-sm flex flex-col justify-between h-28 group relative">
+            <div className="col-span-2 md:col-span-1 p-3 bg-white rounded-xl border border-stone-200 shadow-sm flex flex-col justify-between h-28 group relative">
                 <div className="flex items-start justify-between">
                     <div className="flex items-center gap-1">
                         <p className="text-[10px] text-stone-500 font-bold uppercase tracking-wider">Cost Premium</p>

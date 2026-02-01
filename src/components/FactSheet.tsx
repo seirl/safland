@@ -3,7 +3,7 @@ import { BookOpen, Battery, Globe, Leaf, Sun, AlertTriangle, ArrowRight, Externa
 
 export default function FactSheet() {
   return (
-    <div className="space-y-8 p-6 pb-24">
+    <div className="space-y-8 p-6 pb-8 max-w-3xl mx-auto">
       
       {/* Header */}
       <div>
