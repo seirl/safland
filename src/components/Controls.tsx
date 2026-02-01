@@ -267,7 +267,7 @@ export default function Controls({
                     <p className="text-4xl font-bold text-stone-900 font-mono tracking-tight">
                         {areaNeeded < 1 ? areaNeeded.toPrecision(2) : areaNeeded.toFixed(1)}
                     </p>
-                    <span className="text-lg font-medium text-stone-500">ha-years</span>
+                    <span className="text-lg font-medium text-stone-500">hectare-years</span>
                 </div>
                 
                 <p className="text-xs text-stone-400 mt-2 italic">
