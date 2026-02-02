@@ -9,47 +9,47 @@ export const SAF_TYPES = [
   {
     id: 'corn',
     name: 'Corn (Ethanol)',
-    yieldPerHa: 2800, // Liters per hectare per year
+    yieldPerHa: 2700, // Avg of 2500-2900
     color: '#FACC15', // Yellow
     emoji: '🌽',
     description: 'Starch-based ethanol converted to jet fuel. Requires significant arable land.',
     harvestFrequency: 'Annual harvest',
-    priceMultiplier: 3.5
+    priceMultiplier: 2.75 // Avg of 2.5-3.0
   },
   {
     id: 'soybean',
     name: 'Soybean (HEFA)',
-    yieldPerHa: 600,
+    yieldPerHa: 550, // Avg of 500-600
     color: '#4ADE80', // Green
     emoji: '🫘',
     description: 'Oilseed crop. Lower yield per hectare compared to palm or algae.',
     harvestFrequency: 'Annual harvest',
-    priceMultiplier: 2.5
+    priceMultiplier: 1.75 // Avg of 1.5-2.0
   },
   {
     id: 'rapeseed',
     name: 'Rapeseed (HEFA)',
-    yieldPerHa: 1200,
+    yieldPerHa: 1100, // Avg of 1000-1200
     color: '#F59E0B', // Amber
     emoji: '🌼',
     description: 'Common oilseed in Europe/NA. Moderate yield.',
     harvestFrequency: 'Annual harvest',
-    priceMultiplier: 2.5
+    priceMultiplier: 1.75 // Avg of 1.5-2.0
   },
   {
     id: 'palm',
     name: 'Palm Oil (HEFA)',
-    yieldPerHa: 4500,
+    yieldPerHa: 4000, // Avg of 3500-4500
     color: '#EA580C', // Orange
     emoji: '🌴',
     description: 'High yield oil crop, but major concerns about deforestation and biodiversity.',
     harvestFrequency: 'Continuous harvest (Year-round)',
-    priceMultiplier: 2.2
+    priceMultiplier: 1.75 // Aligned with HEFA
   },
   {
     id: 'jatropha',
     name: 'Jatropha',
-    yieldPerHa: 400,
+    yieldPerHa: 550, // Avg of 400-700
     color: '#84CC16', // Lime
     emoji: '🌿',
     description: 'Hardy plant for marginal soils, but seeds are toxic and difficult to harvest.',
@@ -74,7 +74,7 @@ export const SAF_TYPES = [
     emoji: '☀️',
     description: 'Synthetic kerosene made from renewable electricity and CO2. Extremely land-efficient.',
     harvestFrequency: 'Requires 1 year of solar output',
-    priceMultiplier: 5.0
+    priceMultiplier: 4.0 // Avg of 3.0-5.0
   }
 ] as const;
 
@@ -82,13 +82,13 @@ export type SafType = typeof SAF_TYPES[number];
 
 export const FLIGHT_CLASSES = [
   { id: 'economy', name: 'Economy', multiplier: 1.0 },
-  { id: 'business', name: 'Business', multiplier: 2.5 }, // Heuristic: Business takes ~2.5x space/weight
+  { id: 'business', name: 'Business', multiplier: 2.9 }, // Updated to 2.9x based on UK Govt (DEFRA)
 ] as const;
 
 export type FlightClass = typeof FLIGHT_CLASSES[number];
 
 // Flight heuristics
-export const FUEL_CONSUMPTION_L_PER_100KM_PAX = 3.5; // Average modern aircraft
+export const FUEL_CONSUMPTION_L_PER_100KM_PAX = 3.5; // Fleet avg ~3.5
 export const DEFAULT_PASSENGERS = 250; // Typical widebody
 export const DEFAULT_SPEED_KPH = 850;
 
@@ -97,9 +97,9 @@ export const JET_FUEL_CO2E_PER_L = 2.54; // kg CO2e per liter of jet fuel (combu
 export const SAF_EMISSION_REDUCTION = 0.8; // Average 80% reduction in lifecycle emissions
 
 // Costs (USD)
-export const JET_FUEL_PRICE_PER_L = 0.60; // Approx global average (2025 forecast)
+export const JET_FUEL_PRICE_PER_L = 0.65; // Updated to $0.65/L
 export const SAF_PRICE_PREMIUM_MULTIPLIER = 2.5; // SAF is typically 2-3x more expensive
 
 // Global Stats
-export const GLOBAL_AVIATION_FUEL_CONSUMPTION_L_PER_YEAR = 375_000_000_000; // ~300 Million Tonnes converted to Liters
-export const PEOPLE_FED_PER_HECTARE = 5.0; // Global avg (mixed diet)
+export const GLOBAL_AVIATION_FUEL_CONSUMPTION_L_PER_YEAR = 375_000_000_000; // Updated to 375 Bn L
+export const PEOPLE_FED_PER_HECTARE = 6.0; // Updated to 6 people/ha
