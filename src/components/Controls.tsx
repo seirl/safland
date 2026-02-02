@@ -1,6 +1,7 @@
-import React from 'react';
-import { Plane, Users, Leaf, Info, Droplets, MapPin, Armchair, Repeat, Wind, DollarSign, ArrowRight } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { Plane, Users, Leaf, Info, Droplets, MapPin, Armchair, Repeat, Wind, DollarSign, ArrowRight, Search, Check } from 'lucide-react';
 import { SAF_TYPES, SafType, cn, FLIGHT_CLASSES, FlightClass } from '../lib/utils';
+import { CITIES } from '../lib/cities';
 import * as Motion from 'motion/react-client';
 
 interface ControlsProps {
@@ -25,17 +26,6 @@ interface ControlsProps {
   setFlightClass: (c: FlightClass) => void;
 }
 
-const CITIES = [
-  { name: 'Paris', coords: [48.8566, 2.3522] },
-  { name: 'New York', coords: [40.7128, -74.0060] },
-  { name: 'Singapore', coords: [1.3521, 103.8198] },
-  { name: 'Dubai', coords: [25.2048, 55.2708] },
-  { name: 'London', coords: [51.5074, -0.1278] },
-  { name: 'Tokyo', coords: [35.6762, 139.6503] },
-  { name: 'São Paulo', coords: [-23.5505, -46.6333] },
-  { name: 'Zürich', coords: [47.3769, 8.5417] },
-];
-
 export default function Controls({
   distance,
   setDistance,
@@ -57,6 +47,18 @@ export default function Controls({
   flightClass,
   setFlightClass
 }: ControlsProps) {
+
+  const CITY_CHOICES = [
+    { name: 'My Location', isSpecial: true },
+    { name: 'Paris', isSpecial: false },
+    { name: 'New York', isSpecial: false },
+    { name: 'San Francisco', isSpecial: false },
+    { name: 'London', isSpecial: false },
+    { name: 'Berlin', isSpecial: false },
+    { name: 'Zürich', isSpecial: false },
+    { name: 'Singapore', isSpecial: false },
+    { name: 'Dubai', isSpecial: false },
+  ];
 
   return (
     <div className="flex flex-col gap-4 p-3 md:gap-6 md:p-6 pb-6">
@@ -356,17 +358,18 @@ export default function Controls({
       <section>
          <label className="text-xs font-medium text-stone-500 mb-2 block">Center Map On</label>
          <div className="flex flex-wrap gap-2">
-            {CITIES.map(city => (
+            {CITY_CHOICES.map(city => (
                 <button
                     key={city.name}
                     onClick={() => setCity(city.name)}
                     className={cn(
-                        "px-3 py-1 rounded-full text-xs font-medium border transition-colors",
+                        "px-3 py-1 rounded-full text-xs font-medium border transition-colors flex items-center gap-1",
                         currentCity === city.name
                             ? "bg-stone-800 text-white border-stone-800"
                             : "bg-white text-stone-600 border-stone-200 hover:border-stone-400"
                     )}
                 >
+                    {city.isSpecial && <MapPin className="w-3 h-3" />}
                     {city.name}
                 </button>
             ))}

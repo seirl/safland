@@ -8,18 +8,8 @@ import MapView from './components/Map';
 import Controls from './components/Controls';
 import FactSheet from './components/FactSheet';
 import { SAF_TYPES, FUEL_CONSUMPTION_L_PER_100KM_PAX, DEFAULT_PASSENGERS, FLIGHT_CLASSES, JET_FUEL_CO2E_PER_L, SAF_EMISSION_REDUCTION, cn, JET_FUEL_PRICE_PER_L, SAF_PRICE_PREMIUM_MULTIPLIER } from './lib/utils';
+import { CITIES } from './lib/cities';
 import { Calculator, BookOpen } from 'lucide-react';
-
-const CITIES = {
-  'Paris': [48.8566, 2.3522],
-  'New York': [40.7128, -74.0060],
-  'Singapore': [1.3521, 103.8198],
-  'Dubai': [25.2048, 55.2708],
-  'London': [51.5074, -0.1278],
-  'Tokyo': [35.6762, 139.6503],
-  'São Paulo': [-23.5505, -46.6333],
-  'Zürich': [47.3769, 8.5417],
-} as const;
 
 type Tab = 'calculator' | 'facts';
 
@@ -27,8 +17,8 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<Tab>('calculator');
   
   // Calculator State
-  const [distance, setDistance] = useState(6000); // km
-  const [isRoundtrip, setIsRoundtrip] = useState(false);
+  const [distance, setDistance] = useState(9000); // km
+  const [isRoundtrip, setIsRoundtrip] = useState(true);
   const [passengers, setPassengers] = useState(DEFAULT_PASSENGERS);
   const [isWholePlane, setIsWholePlane] = useState(false);
   const [selectedSaf, setSelectedSaf] = useState(SAF_TYPES[0]);
@@ -81,7 +71,8 @@ export default function App() {
     if (currentCityName === 'My Location' && userLocation) {
         return userLocation;
     }
-    return CITIES[currentCityName as keyof typeof CITIES] || CITIES['Paris'];
+    const city = CITIES.find(c => c.name === currentCityName);
+    return city ? [city.lat, city.lon] : [48.8566, 2.3522]; // Default to Paris
   }, [currentCityName, userLocation]);
 
   const isContextOpen = activeTab === 'facts';

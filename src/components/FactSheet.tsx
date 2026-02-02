@@ -58,7 +58,7 @@ export default function FactSheet() {
         </div>
         
         <p className="text-xs text-stone-500 italic mt-2">
-          To fly a Boeing 747 across the Atlantic on batteries, the battery alone would weigh 40x more than the entire plane currently does. Hydrogen is promising but requires completely new aircraft designs. SAF is the only "drop-in" solution for the 25,000+ planes flying today.
+          To fly a Boeing 747 across the Atlantic on batteries, the battery alone would weigh 40x more than the entire plane currently does.
         </p>
       </section>
 
