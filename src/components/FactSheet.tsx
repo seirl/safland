@@ -12,6 +12,11 @@ import {
 } from '../lib/utils';
 
 const SOURCES = [
+    { name: 'IPCC Sixth Assessment Report (AR6)', url: 'https://www.ipcc.ch/report/ar6/syr/' },
+    { name: 'IEA Net Zero by 2050', url: 'https://www.iea.org/reports/net-zero-by-2050' },
+    { name: 'Our World in Data: Environmental Impacts of Food', url: 'https://ourworldindata.org/environmental-impacts-of-food' },
+    { name: 'ICCT: The real cost of green aviation', url: 'https://theicct.org/' },
+
     { name: 'Simple Flying', url: 'https://simpleflying.com/most-fuel-efficient-long-haul-aircraft/' },
     { name: 'UK Govt (DEFRA)', url: 'https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2025' },
     { name: 'IEA', url: 'https://www.iea.org/reports/world-energy-outlook-2019' },
@@ -24,11 +29,6 @@ const SOURCES = [
     { name: 'KIT', url: 'https://www.ksop.kit.edu/solar_energy.php' },
     { name: 'Argus Media', url: 'https://www.argusmedia.com/en/news-and-insights/market-opinion-and-analysis-blog/sustainable-aviation-fuel-market-outlook-europe' },
     { name: 'Aerospace Global', url: 'https://aerospaceglobalnews.com/news/argus-esaf-price-index/' },
-    // Restored Sources
-    { name: 'IPCC Sixth Assessment Report (AR6)', url: 'https://www.ipcc.ch/report/ar6/syr/' },
-    { name: 'IEA Net Zero by 2050', url: 'https://www.iea.org/reports/net-zero-by-2050' },
-    { name: 'Our World in Data: Environmental Impacts of Food', url: 'https://ourworldindata.org/environmental-impacts-of-food' },
-    { name: 'ICCT: The real cost of green aviation', url: 'https://theicct.org/' },
     { name: 'Elsevier (Ren. Energy): Jatropha Failure', url: 'https://www.researchgate.net/publication/261954447_Jatropha_curcas_A_ten_year_story_from_hope_to_despair' },
 ];
 
