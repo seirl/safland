@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Plane, Users, Leaf, Info, Droplets, MapPin, Armchair, Repeat, Wind, DollarSign, ArrowRight, Search, Check, Globe } from 'lucide-react';
+import { Plane, Users, Leaf, Info, Droplets, MapPin, Armchair, Repeat, Wind, DollarSign, ArrowRight, Search, Check, Globe, BookOpen } from 'lucide-react';
 import { SAF_TYPES, SafType, cn, FLIGHT_CLASSES, FlightClass, PEOPLE_FED_PER_HECTARE } from '../lib/utils';
 import { CITIES } from '../lib/cities';
 import * as Motion from 'motion/react-client';
@@ -24,6 +24,7 @@ interface ControlsProps {
   currentCity: string;
   flightClass: FlightClass;
   setFlightClass: (c: FlightClass) => void;
+  onOpenContext: () => void;
 }
 
 export default function Controls({
@@ -45,7 +46,8 @@ export default function Controls({
   setCity,
   currentCity,
   flightClass,
-  setFlightClass
+  setFlightClass,
+  onOpenContext
 }: ControlsProps) {
 
   const CITY_CHOICES = [

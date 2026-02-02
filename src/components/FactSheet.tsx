@@ -1,7 +1,19 @@
-import React from 'react';
-import { BookOpen, Battery, Globe, Leaf, Sun, AlertTriangle, ArrowRight, ExternalLink } from 'lucide-react';
+import React, { useState } from 'react';
+import { BookOpen, Battery, Globe, Leaf, Sun, AlertTriangle, ArrowRight, ExternalLink, ChevronDown, ChevronUp } from 'lucide-react';
+import { 
+    FUEL_CONSUMPTION_L_PER_100KM_PAX, 
+    GLOBAL_AVIATION_FUEL_CONSUMPTION_L_PER_YEAR, 
+    PEOPLE_FED_PER_HECTARE, 
+    JET_FUEL_PRICE_PER_L, 
+    JET_FUEL_CO2E_PER_L, 
+    SAF_EMISSION_REDUCTION,
+    SAF_TYPES,
+    FLIGHT_CLASSES
+} from '../lib/utils';
 
 export default function FactSheet() {
+  const [isAssumptionsOpen, setIsAssumptionsOpen] = useState(false);
+
   return (
     <div className="space-y-8 p-6 pb-8 max-w-3xl mx-auto">
       
@@ -91,7 +103,7 @@ export default function FactSheet() {
         </p>
 
         {/* Visual Comparison */}
-        <div className="mt-6 flex items-end gap-4 h-48 border-b border-stone-200 pb-2 overflow-x-auto">
+        <div className="mt-6 flex items-end justify-center gap-4 h-48 border-b border-stone-200 pb-2 overflow-x-auto">
             {/* Livestock */}
             <div className="flex flex-col items-center gap-2">
                 <div 
@@ -180,19 +192,105 @@ export default function FactSheet() {
                 <h4 className="font-bold text-stone-800 text-xs mb-2 uppercase">The Challenge</h4>
                 <ul className="text-xs text-stone-600 space-y-2 list-disc pl-3">
                     <li><strong>Cost:</strong> Currently 4-6x more expensive than fossil fuel due to high electricity needs.</li>
-                    <li><strong>Energy Hungry:</strong> Making one liter of e-fuel requires ~20-25 kWh of electricity.</li>
+                    <li><strong>Energy Hungry:</strong> Making one liter of e-fuel requires ~20-25 kWh of electricity. Scaling this to global aviation would require a massive increase in renewable energy production, competing with other sectors (like AI data centers or EV charging).</li>
                     <li><strong>Technology:</strong> Large-scale electrolyzers and carbon capture are still maturing.</li>
                 </ul>
             </div>
         </div>
-        
-        <div className="mt-3 bg-stone-50 p-4 rounded-lg text-[10px] text-stone-600 border border-stone-200">
-            <p className="font-semibold mb-1">🧮 How we calculated the yield (52,000 L/ha):</p>
-            <p className="leading-relaxed opacity-80">
-                Assumes 1 hectare of solar PV generates ~1,000-1,200 MWh/year (conservative global avg). 
-                The Power-to-Liquid (PtL) process has a ~40-50% efficiency (thermodynamic losses from electrolysis & synthesis). 
-                <br/>
-                <span className="font-mono">1,100,000 kWh (Solar) × 0.45 (Efficiency) ÷ 9.6 kWh/L (Jet Fuel Energy) ≈ 51,562 Liters.</span>
+      </section>
+
+      {/* Section 7: About & Methodology */}
+      <section className="space-y-4 pt-4 border-t border-stone-200">
+        <h3 className="text-xl font-bold text-stone-800 flex items-center gap-2">
+            <BookOpen className="w-5 h-5 text-stone-600" />
+            About & Methodology
+        </h3>
+        <div className="prose prose-stone text-sm leading-relaxed text-stone-600">
+            <div>
+                <strong>Goal:</strong> This tool is designed to provide unbiased orders of magnitude regarding the land area required to decarbonize aviation. It does not advocate for or against any specific solution but aims to visualize the physical constraints of a "Net Zero" world.
+            </div>
+            
+            <div className="mt-4">
+                <strong>Methodology:</strong>
+                <ul className="list-disc pl-4 mt-2 space-y-1">
+                    <li><strong>Fuel Consumption:</strong> Based on an average of 3.5 L/100km per passenger for modern wide-body aircraft.</li>
+                    <li><strong>Yields:</strong> Crop yields (Corn, Soy, Palm) are based on global averages (source: Our World in Data, IEA). Algae and E-Fuel yields are theoretical potentials based on current pilot projects and thermodynamic limits.</li>
+                    <li><strong>E-Fuel Yield Calculation:</strong> Assumes 1 hectare of solar PV generates ~1,100 MWh/year. With a ~45% Power-to-Liquid (PtL) efficiency and 9.6 kWh/L energy density for jet fuel, this results in ~52,000 Liters/ha.</li>
+                    <li><strong>Land Equivalent:</strong> The "People Fed" comparison assumes an average of ~2.5 people fed per hectare of arable land (global average for a mixed diet).</li>
+                </ul>
+            </div>
+
+            <div className="mt-4 bg-stone-50 p-4 rounded-lg text-[10px] text-stone-600 border border-stone-200">
+                <button 
+                    onClick={() => setIsAssumptionsOpen(!isAssumptionsOpen)}
+                    className="flex items-center justify-between w-full font-bold text-stone-800 text-xs uppercase hover:text-emerald-700 transition-colors"
+                >
+                    <span>Detailed Assumptions & Constants</span>
+                    {isAssumptionsOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                </button>
+                
+                {isAssumptionsOpen && (
+                    <div className="mt-3 overflow-x-auto">
+                        <table className="w-full text-left border-collapse">
+                            <thead>
+                                <tr className="border-b border-stone-300">
+                                    <th className="py-2 font-semibold">Parameter</th>
+                                    <th className="py-2 font-semibold">Value</th>
+                                    <th className="py-2 font-semibold">Source / Note</th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-stone-200">
+                                <tr>
+                                    <td className="py-2 font-medium">Fuel Consumption</td>
+                                    <td className="py-2 font-mono">{FUEL_CONSUMPTION_L_PER_100KM_PAX} L / 100km / pax</td>
+                                    <td className="py-2 opacity-80">Avg modern wide-body aircraft</td>
+                                </tr>
+                                <tr>
+                                    <td className="py-2 font-medium">Class Multiplier</td>
+                                    <td className="py-2 font-mono">Business = {FLIGHT_CLASSES.find(c => c.id === 'business')?.multiplier}x Economy</td>
+                                    <td className="py-2 opacity-80">Space & weight heuristic</td>
+                                </tr>
+                                <tr>
+                                    <td className="py-2 font-medium">Global Aviation Fuel</td>
+                                    <td className="py-2 font-mono">{(GLOBAL_AVIATION_FUEL_CONSUMPTION_L_PER_YEAR / 1e9).toFixed(1)} Billion L/year</td>
+                                    <td className="py-2 opacity-80">~300 Mt/year (IEA 2019)</td>
+                                </tr>
+                                <tr>
+                                    <td className="py-2 font-medium">Food Production</td>
+                                    <td className="py-2 font-mono">{PEOPLE_FED_PER_HECTARE} people / ha</td>
+                                    <td className="py-2 opacity-80">Global avg (mixed diet)</td>
+                                </tr>
+                                <tr>
+                                    <td className="py-2 font-medium">Jet Fuel Price</td>
+                                    <td className="py-2 font-mono">${JET_FUEL_PRICE_PER_L} / L</td>
+                                    <td className="py-2 opacity-80">Global market avg</td>
+                                </tr>
+                                <tr>
+                                    <td className="py-2 font-medium">Jet Fuel CO₂e</td>
+                                    <td className="py-2 font-mono">{JET_FUEL_CO2E_PER_L} kg / L</td>
+                                    <td className="py-2 opacity-80">Combustion only</td>
+                                </tr>
+                                <tr>
+                                    <td className="py-2 font-medium">SAF Emission Reduction</td>
+                                    <td className="py-2 font-mono">{SAF_EMISSION_REDUCTION * 100}%</td>
+                                    <td className="py-2 opacity-80">Lifecycle reduction vs Fossil</td>
+                                </tr>
+                                {/* SAF Yields */}
+                                {SAF_TYPES.map(saf => (
+                                    <tr key={saf.id} className="bg-stone-100/50">
+                                        <td className="py-2 font-medium pl-2 border-l-2" style={{ borderLeftColor: saf.color }}>Yield: {saf.name}</td>
+                                        <td className="py-2 font-mono">{saf.yieldPerHa.toLocaleString()} L/ha/yr</td>
+                                        <td className="py-2 opacity-80">{saf.id === 'efuel' ? 'Theoretical (Solar PV)' : 'Global Crop Avg'}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                )}
+            </div>
+
+            <p className="text-xs italic mt-4">
+                Built by <a href="https://antoinepietri.fr/" target="_blank" rel="noopener noreferrer" className="underline hover:text-emerald-600">Antoine Pietri</a> as an educational prototype. No conflict of interest or affiliation with energy companies.
             </p>
         </div>
       </section>

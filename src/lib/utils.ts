@@ -49,7 +49,7 @@ export const SAF_TYPES = [
   {
     id: 'jatropha',
     name: 'Jatropha',
-    yieldPerHa: 1500,
+    yieldPerHa: 400,
     color: '#84CC16', // Lime
     emoji: '🌿',
     description: 'Hardy plant for marginal soils, but seeds are toxic and difficult to harvest.',
@@ -93,13 +93,13 @@ export const DEFAULT_PASSENGERS = 250; // Typical widebody
 export const DEFAULT_SPEED_KPH = 850;
 
 // Emissions
-export const JET_FUEL_CO2E_PER_L = 2.5; // kg CO2e per liter of jet fuel (combustion)
+export const JET_FUEL_CO2E_PER_L = 2.54; // kg CO2e per liter of jet fuel (combustion)
 export const SAF_EMISSION_REDUCTION = 0.8; // Average 80% reduction in lifecycle emissions
 
 // Costs (USD)
-export const JET_FUEL_PRICE_PER_L = 0.85; // Approx global average
+export const JET_FUEL_PRICE_PER_L = 0.60; // Approx global average (2025 forecast)
 export const SAF_PRICE_PREMIUM_MULTIPLIER = 2.5; // SAF is typically 2-3x more expensive
 
 // Global Stats
 export const GLOBAL_AVIATION_FUEL_CONSUMPTION_L_PER_YEAR = 375_000_000_000; // ~300 Million Tonnes converted to Liters
-export const PEOPLE_FED_PER_HECTARE = 2.5; // Approx global average for mixed diet
+export const PEOPLE_FED_PER_HECTARE = 5.0; // Global avg (mixed diet)

@@ -1,5 +1,7 @@
 {
-  "name": "SAF Land Footprint",
+  "name": "SAF Land Footprint v2",
   "description": "Visualize the land area required to produce Sustainable Aviation Fuel (SAF) for your flight.",
-  "requestFramePermissions": ["geolocation"]
+  "requestFramePermissions": [
+    "geolocation"
+  ]
 }

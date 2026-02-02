@@ -133,11 +133,11 @@ export default function App() {
                         "flex-1 py-4 text-sm font-medium flex items-center justify-center gap-2 transition-colors border-b-2",
                         activeTab === 'facts' 
                             ? "border-blue-600 text-blue-700 bg-blue-50/30" 
-                            : "border-transparent text-stone-500 hover:text-stone-700 hover:bg-stone-50"
+                            : "border-transparent text-stone-600 hover:text-stone-900 hover:bg-stone-50"
                     )}
                 >
                     <BookOpen className="w-4 h-4" />
-                    Context
+                    Context & Methodology
                 </button>
             </div>
         </div>
@@ -165,6 +165,7 @@ export default function App() {
                     currentCity={currentCityName}
                     flightClass={flightClass}
                     setFlightClass={setFlightClass}
+                    onOpenContext={() => setActiveTab('facts')}
                 />
             ) : (
                 <FactSheet />
