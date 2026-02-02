@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Plane, Users, Leaf, Info, Droplets, MapPin, Armchair, Repeat, Wind, DollarSign, ArrowRight, Search, Check, Globe } from 'lucide-react';
-import { SAF_TYPES, SafType, cn, FLIGHT_CLASSES, FlightClass } from '../lib/utils';
+import { SAF_TYPES, SafType, cn, FLIGHT_CLASSES, FlightClass, PEOPLE_FED_PER_HECTARE } from '../lib/utils';
 import { CITIES } from '../lib/cities';
 import * as Motion from 'motion/react-client';
 
@@ -296,7 +296,14 @@ export default function Controls({
                 </div>
                 
                 <p className="text-xs text-stone-400 mt-2 italic">
-                    *Equivalent to a square of {areaNeeded >= 10000 ? Math.round(Math.sqrt(areaNeeded / 100)).toLocaleString() : Math.round(Math.sqrt(areaNeeded * 10000)).toLocaleString()}km x {areaNeeded >= 10000 ? Math.round(Math.sqrt(areaNeeded / 100)).toLocaleString() : Math.round(Math.sqrt(areaNeeded * 10000)).toLocaleString()}km
+                    {(() => {
+                        const peopleYears = areaNeeded * PEOPLE_FED_PER_HECTARE;
+                        if (peopleYears >= 1) {
+                            return `*Requires as much land as feeding ~${Math.round(peopleYears).toLocaleString()} people for a year.`;
+                        } else {
+                            return `*Requires as much land as feeding 1 person for ~${Math.round(peopleYears * 365)} days.`;
+                        }
+                    })()}
                 </p>
             </div>
 

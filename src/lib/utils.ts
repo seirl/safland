@@ -102,3 +102,4 @@ export const SAF_PRICE_PREMIUM_MULTIPLIER = 2.5; // SAF is typically 2-3x more e
 
 // Global Stats
 export const GLOBAL_AVIATION_FUEL_CONSUMPTION_L_PER_YEAR = 375_000_000_000; // ~300 Million Tonnes converted to Liters
+export const PEOPLE_FED_PER_HECTARE = 2.5; // Approx global average for mixed diet
