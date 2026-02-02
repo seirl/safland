@@ -22,7 +22,7 @@ interface MapViewProps {
   center: [number, number];
   areaHectares: number;
   safType: SafType;
-  isWholePlane: boolean;
+  scope: 'pax' | 'plane' | 'global';
   onCenterChange: (center: [number, number]) => void;
 }
 
@@ -65,7 +65,7 @@ function ZoomToFit({ position, radius }: { position: [number, number], radius: n
     );
 }
 
-export default function MapView({ center, areaHectares, safType, isWholePlane, onCenterChange }: MapViewProps) {
+export default function MapView({ center, areaHectares, safType, scope, onCenterChange }: MapViewProps) {
   // Calculate radius in meters
   // Area (ha) * 10,000 = Area (m2)
   // Area = PI * r^2  => r = sqrt(Area / PI)

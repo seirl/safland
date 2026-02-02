@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Plane, Users, Leaf, Info, Droplets, MapPin, Armchair, Repeat, Wind, DollarSign, ArrowRight, Search, Check } from 'lucide-react';
+import { Plane, Users, Leaf, Info, Droplets, MapPin, Armchair, Repeat, Wind, DollarSign, ArrowRight, Search, Check, Globe } from 'lucide-react';
 import { SAF_TYPES, SafType, cn, FLIGHT_CLASSES, FlightClass } from '../lib/utils';
 import { CITIES } from '../lib/cities';
 import * as Motion from 'motion/react-client';
@@ -11,8 +11,8 @@ interface ControlsProps {
   setIsRoundtrip: (b: boolean) => void;
   passengers: number;
   setPassengers: (p: number) => void;
-  isWholePlane: boolean;
-  setIsWholePlane: (b: boolean) => void;
+  scope: 'pax' | 'plane' | 'global';
+  setScope: (s: 'pax' | 'plane' | 'global') => void;
   selectedSaf: SafType;
   setSelectedSaf: (s: SafType) => void;
   fuelNeeded: number;
@@ -33,8 +33,8 @@ export default function Controls({
   setIsRoundtrip,
   passengers,
   setPassengers,
-  isWholePlane,
-  setIsWholePlane,
+  scope,
+  setScope,
   selectedSaf,
   setSelectedSaf,
   fuelNeeded,
@@ -74,10 +74,54 @@ export default function Controls({
         </p>
       </div>
 
-      {/* Flight Inputs */}
+      {/* Scope Selection (Top) */}
+      <section className="space-y-3">
+        <h2 className="text-sm font-semibold text-stone-700 uppercase tracking-wider">Scope</h2>
+        <div className="flex bg-stone-100 p-1 rounded-xl">
+            <button
+                onClick={() => setScope('pax')}
+                className={cn(
+                    "flex-1 py-2 px-2 rounded-lg text-xs font-medium transition-all flex flex-col items-center justify-center gap-1",
+                    scope === 'pax'
+                        ? "bg-white text-stone-900 shadow-sm ring-1 ring-black/5"
+                        : "text-stone-500 hover:text-stone-700"
+                )}
+            >
+                <Users className="w-4 h-4" />
+                Single Passenger
+            </button>
+            <button
+                onClick={() => setScope('plane')}
+                className={cn(
+                    "flex-1 py-2 px-2 rounded-lg text-xs font-medium transition-all flex flex-col items-center justify-center gap-1",
+                    scope === 'plane'
+                        ? "bg-white text-stone-900 shadow-sm ring-1 ring-black/5"
+                        : "text-stone-500 hover:text-stone-700"
+                )}
+            >
+                <Plane className="w-4 h-4" />
+                Whole Plane
+            </button>
+            <button
+                onClick={() => setScope('global')}
+                className={cn(
+                    "flex-1 py-2 px-2 rounded-lg text-xs font-medium transition-all flex flex-col items-center justify-center gap-1",
+                    scope === 'global'
+                        ? "bg-white text-stone-900 shadow-sm ring-1 ring-black/5"
+                        : "text-stone-500 hover:text-stone-700"
+                )}
+            >
+                <Globe className="w-4 h-4" />
+                Global Fleet
+            </button>
+        </div>
+      </section>
+
+      {/* Flight Inputs (Hidden for Global) */}
+      {scope !== 'global' && (
       <section className="space-y-4">
         <div className="flex items-center justify-between">
-            <h2 className="text-sm font-semibold text-stone-700 uppercase tracking-wider">Flight Details</h2>
+            <h2 className="text-sm font-semibold text-stone-700 uppercase tracking-wider">Estimation Parameters</h2>
         </div>
         
         <div className="space-y-3">
@@ -127,34 +171,7 @@ export default function Controls({
                 </div>
             </div>
 
-            <div className="flex items-center gap-4 pt-2">
-                <button 
-                    onClick={() => setIsWholePlane(false)}
-                    className={cn(
-                        "flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-all flex items-center justify-center gap-2 border",
-                        !isWholePlane 
-                            ? "bg-stone-800 text-white border-stone-800 shadow-md" 
-                            : "bg-white text-stone-600 border-stone-200 hover:bg-stone-50"
-                    )}
-                >
-                    <Users className="w-4 h-4" />
-                    1 Passenger
-                </button>
-                <button 
-                    onClick={() => setIsWholePlane(true)}
-                    className={cn(
-                        "flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-all flex items-center justify-center gap-2 border",
-                        isWholePlane 
-                            ? "bg-stone-800 text-white border-stone-800 shadow-md" 
-                            : "bg-white text-stone-600 border-stone-200 hover:bg-stone-50"
-                    )}
-                >
-                    <Plane className="w-4 h-4" />
-                    Whole Plane
-                </button>
-            </div>
-
-            {isWholePlane ? (
+            {scope === 'plane' ? (
                  <Motion.div 
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
@@ -202,6 +219,7 @@ export default function Controls({
             )}
         </div>
       </section>
+      )}
 
       <hr className="border-stone-100" />
 
@@ -267,13 +285,18 @@ export default function Controls({
                 
                 <div className="flex items-baseline gap-2">
                     <p className="text-4xl font-bold text-stone-900 font-mono tracking-tight">
-                        {areaNeeded < 1 ? areaNeeded.toPrecision(2) : areaNeeded.toFixed(1)}
+                        {areaNeeded >= 10000 
+                            ? (areaNeeded / 100).toLocaleString(undefined, { maximumFractionDigits: 1 }) 
+                            : (areaNeeded < 1 ? areaNeeded.toPrecision(2) : areaNeeded.toFixed(1))
+                        }
                     </p>
-                    <span className="text-lg font-medium text-stone-500">hectare-years</span>
+                    <span className="text-lg font-medium text-stone-500">
+                        {areaNeeded >= 10000 ? "km²" : "hectare-years"}
+                    </span>
                 </div>
                 
                 <p className="text-xs text-stone-400 mt-2 italic">
-                    *Equivalent to a square of {Math.round(Math.sqrt(areaNeeded * 10000))}m x {Math.round(Math.sqrt(areaNeeded * 10000))}m
+                    *Equivalent to a square of {areaNeeded >= 10000 ? Math.round(Math.sqrt(areaNeeded / 100)).toLocaleString() : Math.round(Math.sqrt(areaNeeded * 10000)).toLocaleString()}km x {areaNeeded >= 10000 ? Math.round(Math.sqrt(areaNeeded / 100)).toLocaleString() : Math.round(Math.sqrt(areaNeeded * 10000)).toLocaleString()}km
                 </p>
             </div>
 
@@ -284,6 +307,7 @@ export default function Controls({
         </div>
 
         {/* Secondary Metrics */}
+        {scope !== 'global' && (
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {/* Fuel */}
             <div className="p-3 bg-white rounded-xl border border-stone-200 shadow-sm flex flex-col justify-between h-28">
@@ -352,6 +376,7 @@ export default function Controls({
                 </div>
             </div>
         </div>
+        )}
       </section>
 
       {/* Location Control */}

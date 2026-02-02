@@ -7,11 +7,12 @@ import React, { useState, useMemo, useEffect } from 'react';
 import MapView from './components/Map';
 import Controls from './components/Controls';
 import FactSheet from './components/FactSheet';
-import { SAF_TYPES, FUEL_CONSUMPTION_L_PER_100KM_PAX, DEFAULT_PASSENGERS, FLIGHT_CLASSES, JET_FUEL_CO2E_PER_L, SAF_EMISSION_REDUCTION, cn, JET_FUEL_PRICE_PER_L, SAF_PRICE_PREMIUM_MULTIPLIER } from './lib/utils';
+import { SAF_TYPES, FUEL_CONSUMPTION_L_PER_100KM_PAX, DEFAULT_PASSENGERS, FLIGHT_CLASSES, JET_FUEL_CO2E_PER_L, SAF_EMISSION_REDUCTION, cn, JET_FUEL_PRICE_PER_L, SAF_PRICE_PREMIUM_MULTIPLIER, GLOBAL_AVIATION_FUEL_CONSUMPTION_L_PER_YEAR } from './lib/utils';
 import { CITIES } from './lib/cities';
 import { Calculator, BookOpen } from 'lucide-react';
 
 type Tab = 'calculator' | 'facts';
+type Scope = 'pax' | 'plane' | 'global';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<Tab>('calculator');
@@ -20,7 +21,7 @@ export default function App() {
   const [distance, setDistance] = useState(9000); // km
   const [isRoundtrip, setIsRoundtrip] = useState(true);
   const [passengers, setPassengers] = useState(DEFAULT_PASSENGERS);
-  const [isWholePlane, setIsWholePlane] = useState(false);
+  const [scope, setScope] = useState<Scope>('pax');
   const [selectedSaf, setSelectedSaf] = useState(SAF_TYPES[0]);
   const [currentCityName, setCurrentCityName] = useState('Paris');
   const [flightClass, setFlightClass] = useState(FLIGHT_CLASSES[0]);
@@ -64,13 +65,17 @@ export default function App() {
 
   // Calculations
   const fuelNeeded = useMemo(() => {
-    const pax = isWholePlane ? passengers : 1;
-    const classMultiplier = isWholePlane ? 1 : flightClass.multiplier;
+    if (scope === 'global') {
+        return GLOBAL_AVIATION_FUEL_CONSUMPTION_L_PER_YEAR;
+    }
+
+    const pax = scope === 'plane' ? passengers : 1;
+    const classMultiplier = scope === 'plane' ? 1 : flightClass.multiplier;
     const tripMultiplier = isRoundtrip ? 2 : 1;
     
     // (L/100km/pax * distance * pax * multiplier * trip) / 100
     return (FUEL_CONSUMPTION_L_PER_100KM_PAX * distance * pax * classMultiplier * tripMultiplier) / 100;
-  }, [distance, passengers, isWholePlane, flightClass, isRoundtrip]);
+  }, [distance, passengers, scope, flightClass, isRoundtrip]);
 
   const areaNeeded = useMemo(() => {
     // Fuel (L) / Yield (L/ha)
@@ -147,8 +152,8 @@ export default function App() {
                     setIsRoundtrip={setIsRoundtrip}
                     passengers={passengers}
                     setPassengers={setPassengers}
-                    isWholePlane={isWholePlane}
-                    setIsWholePlane={setIsWholePlane}
+                    scope={scope}
+                    setScope={setScope}
                     selectedSaf={selectedSaf}
                     setSelectedSaf={setSelectedSaf}
                     fuelNeeded={fuelNeeded}
@@ -176,7 +181,7 @@ export default function App() {
             center={currentCityCoords as [number, number]} 
             areaHectares={areaNeeded}
             safType={selectedSaf}
-            isWholePlane={isWholePlane}
+            scope={scope}
             onCenterChange={(newCenter) => {
                 setUserLocation(newCenter);
                 setCurrentCityName('Custom Location');

@@ -99,3 +99,6 @@ export const SAF_EMISSION_REDUCTION = 0.8; // Average 80% reduction in lifecycle
 // Costs (USD)
 export const JET_FUEL_PRICE_PER_L = 0.85; // Approx global average
 export const SAF_PRICE_PREMIUM_MULTIPLIER = 2.5; // SAF is typically 2-3x more expensive
+
+// Global Stats
+export const GLOBAL_AVIATION_FUEL_CONSUMPTION_L_PER_YEAR = 375_000_000_000; // ~300 Million Tonnes converted to Liters
