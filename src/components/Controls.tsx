@@ -277,8 +277,8 @@ export default function Controls({
                 </p>
             </div>
 
-            {/* Land Area Tooltip - Triggers on card hover */}
-            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-stone-800 text-white text-[10px] rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-[100]">
+            {/* Land Area Tooltip - Triggers on card hover or active */}
+            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-stone-800 text-white text-[10px] rounded shadow-lg opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity pointer-events-none z-[100]">
                 "Hectare-Year" means 1 hectare of land occupied for 1 full year to produce this amount of fuel.
             </div>
         </div>
@@ -315,7 +315,7 @@ export default function Controls({
                     <p className="text-[10px] text-stone-400 mt-1">kg CO₂e</p>
                 </div>
                 {/* Emissions Tooltip */}
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-stone-800 text-white text-[10px] rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-[100]">
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-stone-800 text-white text-[10px] rounded shadow-lg opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity pointer-events-none z-[100]">
                     SAF reduces lifecycle emissions by ~80% compared to fossil jet fuel. The remaining 20% comes from production, transport, and non-CO2 effects.
                 </div>
             </div>
@@ -340,7 +340,7 @@ export default function Controls({
                     </div>
                 </div>
                  {/* Cost Tooltip */}
-                 <div className="absolute bottom-full right-0 mb-2 w-48 p-2 bg-stone-800 text-white text-[10px] rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-[100]">
+                 <div className="absolute bottom-full right-0 mb-2 w-48 p-2 bg-stone-800 text-white text-[10px] rounded shadow-lg opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity pointer-events-none z-[100]">
                     <div className="flex justify-between mb-1">
                         <span>Fossil Jet Fuel:</span>
                         <span>${Math.round(fossilCost).toLocaleString()}</span>

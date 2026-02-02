@@ -41,6 +41,27 @@ export default function App() {
     }
   }, []);
 
+  const handleSetCity = (city: string) => {
+    if (city === 'My Location') {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    setUserLocation([position.coords.latitude, position.coords.longitude]);
+                    setCurrentCityName('My Location');
+                },
+                (error) => {
+                    console.error('Geolocation failed', error);
+                    alert("Could not retrieve your location. Please check browser permissions.");
+                }
+            );
+        } else {
+            alert("Geolocation is not supported by your browser.");
+        }
+    } else {
+        setCurrentCityName(city);
+    }
+  };
+
   // Calculations
   const fuelNeeded = useMemo(() => {
     const pax = isWholePlane ? passengers : 1;
@@ -68,7 +89,7 @@ export default function App() {
   }, [fuelNeeded, selectedSaf]);
 
   const currentCityCoords = useMemo(() => {
-    if (currentCityName === 'My Location' && userLocation) {
+    if ((currentCityName === 'My Location' || currentCityName === 'Custom Location') && userLocation) {
         return userLocation;
     }
     const city = CITIES.find(c => c.name === currentCityName);
@@ -135,7 +156,7 @@ export default function App() {
                     emissionsAvoided={emissionsAvoided}
                     safCost={costs.saf}
                     fossilCost={costs.fossil}
-                    setCity={setCurrentCityName}
+                    setCity={handleSetCity}
                     currentCity={currentCityName}
                     flightClass={flightClass}
                     setFlightClass={setFlightClass}
@@ -157,17 +178,8 @@ export default function App() {
             safType={selectedSaf}
             isWholePlane={isWholePlane}
             onCenterChange={(newCenter) => {
-                // Update the "current city" to be custom coordinates so we don't snap back
-                // We can use a special "Custom Location" state or just update the coords
-                // But our current structure uses a name -> coord map.
-                // Let's just update the internal state in MapView? 
-                // No, the issue is that App.tsx passes `currentCityCoords` which is derived from `currentCityName`.
-                // If we drag, we need to update `currentCityName` to something that reflects "Custom" 
-                // AND update the coordinates backing it.
-                
-                // Actually, simpler: Let's add a `customLocation` state to App.tsx
                 setUserLocation(newCenter);
-                setCurrentCityName('My Location');
+                setCurrentCityName('Custom Location');
             }}
         />
       </div>
