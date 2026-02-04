@@ -200,9 +200,9 @@ export default function FactSheet() {
             E-fuels are synthetic kerosene made by combining hydrogen (from water + renewable electricity) with captured CO₂.
         </p>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
+        <div className="flex flex-col gap-4 mt-2">
             <div className="bg-stone-50 p-4 rounded-lg border border-stone-200">
-                <h4 className="font-bold text-stone-800 text-xs mb-2 uppercase">The Good</h4>
+                <h4 className="font-bold text-xs mb-2 uppercase text-emerald-700">The Good</h4>
                 <ul className="text-xs text-stone-600 space-y-2 list-disc pl-3">
                     <li><strong>Land Efficiency:</strong> Solar panels are ~50x more efficient than photosynthesis, requiring vastly less land.</li>
                     <li><strong>Scalability:</strong> Can be produced in deserts or offshore, avoiding competition with food crops.</li>
@@ -210,10 +210,12 @@ export default function FactSheet() {
                 </ul>
             </div>
             <div className="bg-stone-50 p-4 rounded-lg border border-stone-200">
-                <h4 className="font-bold text-stone-800 text-xs mb-2 uppercase">The Challenge</h4>
+                <h4 className="font-bold text-xs mb-2 uppercase text-amber-700">The Challenge</h4>
                 <ul className="text-xs text-stone-600 space-y-2 list-disc pl-3">
                     <li><strong>Cost:</strong> Currently 4-6x more expensive than fossil fuel due to high electricity needs.</li>
-                    <li><strong>Energy Hungry:</strong> Making one liter of e-fuel requires ~20-25 kWh of electricity. Scaling this to global aviation would require a massive increase in renewable energy production, competing with other sectors (like AI data centers or EV charging).</li>
+                    <li><strong>Water Scarcity:</strong> Producing hydrogen in deserts (where solar is best) requires water. Electrolysis consumes ~9L of water per kg of Hydrogen, necessitating desalination infrastructure.</li>
+                    <li><strong>Carbon Source (DAC):</strong> To be truly Net Zero, CO₂ must be captured directly from the air (Direct Air Capture), not from smokestacks. DAC is currently energy-intensive and expensive to scale.</li>
+                    <li><strong>Energy Hungry:</strong> Making one liter of e-fuel requires ~20-25 kWh of electricity. Scaling this implies a massive increase in renewable energy production.</li>
                     <li><strong>Technology:</strong> Large-scale electrolyzers and carbon capture are still maturing.</li>
                 </ul>
             </div>
@@ -229,6 +231,9 @@ export default function FactSheet() {
         <div className="prose prose-stone text-sm leading-relaxed text-stone-600">
             <div>
                 This tool is designed to provide unbiased orders of magnitude regarding the land area required to decarbonize aviation. It does not advocate for or against any specific solution but aims to visualize the physical constraints of a "Net Zero" world.
+            </div>
+            <div className="mt-2">
+                This tool visualizes the <strong>physical constraints</strong> (Land Use & Energy Density) of decarbonization, not the <strong>economic constraints</strong> (CAPEX/OPEX). While E-fuels are physically superior (solar is ~50x more efficient than photosynthesis), they currently face massive economic and infrastructure hurdles compared to biofuels.
             </div>
             
             <div className="mt-4">
