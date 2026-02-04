@@ -19,7 +19,7 @@ export const SAF_TYPES = [
   {
     id: 'soybean',
     name: 'Soybean (HEFA)',
-    yieldPerHa: 550, // Avg of 500-600
+    yieldPerHa: 630, // Updated to 630 based on Mero et al. (2025)
     color: '#4ADE80', // Green
     emoji: '🫘',
     description: 'Oilseed crop. Lower yield per hectare compared to palm or algae.',
@@ -29,7 +29,7 @@ export const SAF_TYPES = [
   {
     id: 'rapeseed',
     name: 'Rapeseed (HEFA)',
-    yieldPerHa: 1100, // Avg of 1000-1200
+    yieldPerHa: 1700, // Updated to 1700 based on UFOP (2025)
     color: '#F59E0B', // Amber
     emoji: '🌼',
     description: 'Common oilseed in Europe/NA. Moderate yield.',
@@ -39,7 +39,7 @@ export const SAF_TYPES = [
   {
     id: 'palm',
     name: 'Palm Oil (HEFA)',
-    yieldPerHa: 4000, // Avg of 3500-4500
+    yieldPerHa: 4250, // Updated to 4250 based on MPOB (2024)
     color: '#EA580C', // Orange
     emoji: '🌴',
     description: 'High yield oil crop, but major concerns about deforestation and biodiversity.',

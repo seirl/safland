@@ -25,12 +25,20 @@ const SOURCES = [
     { name: 'Cassidy et al. (UMN)', url: 'https://iopscience.iop.org/article/10.1088/1748-9326/8/3/034015' },
     { name: 'NREL', url: 'https://docs.nrel.gov/docs/fy24osti/85351.pdf' },
     { name: 'Transport & Env.', url: 'https://te-cdn.ams3.cdn.digitaloceanspaces.com/files/Biofuels-briefing-072021.pdf' },
-    { name: 'US Dept. of Energy', url: 'https://www.energy.gov/eere/bioenergy/algal-biofuels' },
+    { name: 'US DoE / MSU Ext: Algae for Biofuels', url: 'https://srac.msstate.edu/pdfs/Fact%20Sheets/4309%20Algae%20for%20Biofuels-%20Production%20and%20Conversion.pdf' },
     { name: 'KIT', url: 'https://www.ksop.kit.edu/solar_energy.php' },
     { name: 'Argus Media', url: 'https://www.argusmedia.com/en/news-and-insights/market-opinion-and-analysis-blog/sustainable-aviation-fuel-market-outlook-europe' },
     { name: 'Aerospace Global', url: 'https://aerospaceglobalnews.com/news/argus-esaf-price-index/' },
-    { name: 'Elsevier (Ren. Energy): Jatropha Failure', url: 'https://www.researchgate.net/publication/261954447_Jatropha_curcas_A_ten_year_story_from_hope_to_despair' },
+    { name: 'Singh et al.: Jatropha curcas - Hope to Despair', url: 'https://www.researchgate.net/publication/261954447_Jatropha_curcas_A_ten_year_story_from_hope_to_despair' },
     { name: 'UBA: Power-to-Liquids (Schmidt et al.)', url: 'https://www.umweltbundesamt.de/publikationen/power-to-liquids-potentials-perspectives-for-the' },
+    { name: 'USDA NASS: Crop Production 2024', url: 'https://www.nass.usda.gov/Publications/Todays_Reports/reports/cropan25.pdf' },
+    { name: 'Uddin et al. (2025): SAF from Ethanol', url: 'https://doi.org/10.1016/j.apenergy.2025.126373' },
+    { name: 'Han et al. (2017): Ethanol-to-Jet Analysis', url: 'https://biotechnologyforbiofuels.biomedcentral.com/articles/10.1186/s13068-017-0698-z' },
+    { name: 'Mero et al. (2025): SAF from Waste Feedstock', url: 'https://doi.org/10.3390/molecules30234648' },
+    { name: 'Marchesan et al. (2025): Microbial Oil SAF', url: 'https://doi.org/10.1016/j.biortech.2024.131772' },
+    { name: 'UFOP (2025): Rapeseed Biodiesel', url: 'https://www.ufop.de/files/9616/7871/9198/ENG_UFOP_Rapeseed_uses_per_hectare_090323.jpg' },
+    { name: 'MPOB (2024): Malaysian Palm Oil Performance', url: 'https://bepi.mpob.gov.my/images/overview/Overview2024.pdf' },
+    { name: 'NREL (2024): HEFA State-of-Industry', url: 'https://www.nrel.gov/docs/fy24osti/87803.pdf' },
 ];
 
 export default function FactSheet() {
@@ -326,12 +334,12 @@ export default function FactSheet() {
                                         <td className="py-2 font-medium pl-2 border-l-2" style={{ borderLeftColor: saf.color }}>{saf.name}</td>
                                         <td className="py-2 font-mono">{saf.yieldPerHa.toLocaleString()}</td>
                                         <td className="py-2 opacity-80 text-xs">
-                                            {saf.id === 'corn' && <><strong>USDA / NREL</strong>. Avg corn yield ~11 t/ha → Ethanol → Jet.</>}
-                                            {saf.id === 'soybean' && <><strong>Transport & Env.</strong> Low oil yield crop.</>}
-                                            {saf.id === 'rapeseed' && <><strong>UFOP</strong>. Standard EU biodiesel feedstock.</>}
-                                            {saf.id === 'palm' && <><strong>MPOB</strong>. High yield, high regional variability.</>}
-                                            {saf.id === 'jatropha' && <><strong>Elsevier</strong>. Historically failed to scale; low yields on marginal land.</>}
-                                            {saf.id === 'algae' && <><strong>US DoE</strong>. Projected scalable open-pond systems.</>}
+                                            {saf.id === 'corn' && <><strong>USDA / Uddin / Han</strong>. Yield ~11.5 t/ha → Ethanol (2.86 gal/bu) → Jet (60% eff).</>}
+                                            {saf.id === 'soybean' && <><strong>Mero et al. (2025)</strong>. Yield ~3.3 t/ha → ~19% Oil → HEFA.</>}
+                                            {saf.id === 'rapeseed' && <><strong>UFOP (2025)</strong>. Yield ~4.0 t/ha → ~42% Oil → HEFA.</>}
+                                            {saf.id === 'palm' && <><strong>MPOB (2024)</strong>. Yield ~4.0 t/ha Oil → HEFA.</>}
+                                            {saf.id === 'jatropha' && <><strong>Singh et al. (2014)</strong>. Historically failed to scale; low yields on marginal land.</>}
+                                            {saf.id === 'algae' && <><strong>US DoE / MSU</strong>. Projected scalable open-pond systems.</>}
                                             {saf.id === 'efuel' && <><strong>UBA / Schmidt et al.</strong>. Temperate Zone (Europe) baseline. Deserts can yield &gt;100,000 L/ha.</>}
                                         </td>
                                     </tr>
@@ -343,8 +351,8 @@ export default function FactSheet() {
                                         <td className="py-2 font-medium pl-2 border-l-2" style={{ borderLeftColor: saf.color }}>{saf.name}</td>
                                         <td className="py-2 font-mono">{saf.priceMultiplier}x Jet</td>
                                         <td className="py-2 opacity-80 text-xs">
-                                            {saf.id === 'corn' && <><strong>NREL</strong>. Higher energy intensity than HEFA.</>}
-                                            {['soybean', 'rapeseed', 'palm'].includes(saf.id) && <><strong>Argus Media</strong>. Premia narrowing as capacity increases.</>}
+                                            {saf.id === 'corn' && <><strong>Uddin et al. (2025)</strong>. Higher energy intensity than HEFA.</>}
+                                            {['soybean', 'rapeseed', 'palm'].includes(saf.id) && <><strong>NREL (2024)</strong>. Range $1.85-$4.00/gal depending on feedstock.</>}
                                             {saf.id === 'jatropha' && <><strong>Elsevier</strong>.</>}
                                             {saf.id === 'algae' && <><strong>US DoE</strong>. Pre-commercial/Pilot cost basis.</>}
                                             {saf.id === 'efuel' && <><strong>Aerospace Global</strong>. High green premium due to electrolysis costs.</>}
