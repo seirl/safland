@@ -47,6 +47,16 @@ export const SAF_TYPES = [
     priceMultiplier: 1.75 // Aligned with HEFA
   },
   {
+    id: 'sugarcane',
+    name: 'Sugarcane (MO-HEFA)',
+    yieldPerHa: 2450, // Based on Mero et al. (2025)
+    color: '#EC4899', // Pink
+    emoji: '🎋',
+    description: 'High yield crop. Pathway via microbial oil or ethanol-to-jet.',
+    harvestFrequency: 'Annual harvest',
+    priceMultiplier: 1.85 // Based on Cet Journal (2024)
+  },
+  {
     id: 'jatropha',
     name: 'Jatropha',
     yieldPerHa: 550, // Avg of 400-700

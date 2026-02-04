@@ -39,6 +39,7 @@ const SOURCES = [
     { name: 'UFOP (2025): Rapeseed Biodiesel', url: 'https://www.ufop.de/files/9616/7871/9198/ENG_UFOP_Rapeseed_uses_per_hectare_090323.jpg' },
     { name: 'MPOB (2024): Malaysian Palm Oil Performance', url: 'https://bepi.mpob.gov.my/images/overview/Overview2024.pdf' },
     { name: 'NREL (2024): HEFA State-of-Industry', url: 'https://www.nrel.gov/docs/fy24osti/87803.pdf' },
+    { name: 'Cet Journal (2024): SAF in Brazil', url: 'https://www.cetjournal.it/index.php/cet/article/view/CET24109013' },
 ];
 
 export default function FactSheet() {
@@ -413,6 +414,7 @@ export default function FactSheet() {
                                             {saf.id === 'soybean' && <><strong>Mero et al. (2025)</strong>. Yield ~3.3 t/ha → ~19% Oil → HEFA.</>}
                                             {saf.id === 'rapeseed' && <><strong>UFOP (2025)</strong>. Yield ~4.0 t/ha → ~42% Oil → HEFA.</>}
                                             {saf.id === 'palm' && <><strong>MPOB (2024)</strong>. Yield ~4.0 t/ha Oil → HEFA.</>}
+                                            {saf.id === 'sugarcane' && <><strong>Mero et al. (2025)</strong>. Yield ~76.3 t/ha → Microbial Oil → HEFA.</>}
                                             {saf.id === 'jatropha' && <><strong>Singh et al. (2014)</strong>. Historically failed to scale; low yields on marginal land.</>}
                                             {saf.id === 'algae' && <><strong>US DoE / MSU</strong>. Projected scalable open-pond systems.</>}
                                             {saf.id === 'efuel' && <><strong>UBA / Schmidt et al.</strong>. Temperate Zone (Europe) baseline. Deserts can yield &gt;100,000 L/ha.</>}
@@ -428,6 +430,7 @@ export default function FactSheet() {
                                         <td className="py-2 opacity-80 text-xs">
                                             {saf.id === 'corn' && <><strong>Uddin et al. (2025)</strong>. Higher energy intensity than HEFA.</>}
                                             {['soybean', 'rapeseed', 'palm'].includes(saf.id) && <><strong>NREL (2024)</strong>. Range $1.85-$4.00/gal depending on feedstock.</>}
+                                            {saf.id === 'sugarcane' && <><strong>Cet Journal (2024)</strong>. Integrated Brazilian production (~$1.10/L).</>}
                                             {saf.id === 'jatropha' && <><strong>Singh et al. (2014)</strong>.</>}
                                             {saf.id === 'algae' && <><strong>US DoE</strong>. Pre-commercial/Pilot cost basis.</>}
                                             {saf.id === 'efuel' && <><strong>Aerospace Global</strong>. High green premium due to electrolysis costs.</>}
