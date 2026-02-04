@@ -30,6 +30,7 @@ const SOURCES = [
     { name: 'Argus Media', url: 'https://www.argusmedia.com/en/news-and-insights/market-opinion-and-analysis-blog/sustainable-aviation-fuel-market-outlook-europe' },
     { name: 'Aerospace Global', url: 'https://aerospaceglobalnews.com/news/argus-esaf-price-index/' },
     { name: 'Elsevier (Ren. Energy): Jatropha Failure', url: 'https://www.researchgate.net/publication/261954447_Jatropha_curcas_A_ten_year_story_from_hope_to_despair' },
+    { name: 'UBA: Power-to-Liquids (Schmidt et al.)', url: 'https://www.umweltbundesamt.de/publikationen/power-to-liquids-potentials-perspectives-for-the' },
 ];
 
 export default function FactSheet() {
@@ -212,7 +213,7 @@ export default function FactSheet() {
             <div className="bg-stone-50 p-4 rounded-lg border border-stone-200">
                 <h4 className="font-bold text-xs mb-2 uppercase text-amber-700">The Challenge</h4>
                 <ul className="text-xs text-stone-600 space-y-2 list-disc pl-3">
-                    <li><strong>Cost:</strong> Currently 4-6x more expensive than fossil fuel due to high electricity needs.</li>
+                    <li><strong>Cost:</strong> Currently ~13x more expensive than fossil fuel due to high electricity needs and lack of scale.</li>
                     <li><strong>Water Scarcity:</strong> Producing hydrogen in deserts (where solar is best) requires water. Electrolysis consumes ~9L of water per kg of Hydrogen, necessitating desalination infrastructure.</li>
                     <li><strong>Carbon Source (DAC):</strong> To be truly Net Zero, CO₂ must be captured directly from the air (Direct Air Capture), not from smokestacks. DAC is currently energy-intensive and expensive to scale.</li>
                     <li><strong>Energy Hungry:</strong> Making one liter of e-fuel requires ~20-25 kWh of electricity. Scaling this implies a massive increase in renewable energy production.</li>
@@ -241,7 +242,7 @@ export default function FactSheet() {
                 <ul className="list-disc pl-4 mt-2 space-y-1">
                     <li><strong>Fuel Consumption:</strong> Based on an average of 3.5 L/100km per passenger for modern wide-body aircraft.</li>
                     <li><strong>Yields:</strong> Crop yields (Corn, Soy, Palm) are based on global averages (source: Our World in Data, IEA). Algae and E-Fuel yields are theoretical potentials based on current pilot projects and thermodynamic limits.</li>
-                    <li><strong>E-Fuel Yield Calculation:</strong> Assumes 1 hectare of solar PV generates ~1,100 MWh/year. With a ~45% Power-to-Liquid (PtL) efficiency and 9.6 kWh/L energy density for jet fuel, this results in ~52,000 Liters/ha.</li>
+                    <li><strong>E-Fuel Yield Calculation:</strong> Assumes 1 hectare of solar PV generates ~1,100 MWh/year (Temperate Zone). With a ~45% Power-to-Liquid (PtL) efficiency and 9.6 kWh/L energy density for jet fuel, this results in ~52,000 Liters/ha.</li>
                     <li><strong>Land Equivalent:</strong> The "People Fed" comparison assumes an average of ~{PEOPLE_FED_PER_HECTARE} people fed per hectare of arable land (global average for a mixed diet).</li>
                 </ul>
             </div>
@@ -331,7 +332,7 @@ export default function FactSheet() {
                                             {saf.id === 'palm' && <><strong>MPOB</strong>. High yield, high regional variability.</>}
                                             {saf.id === 'jatropha' && <><strong>Elsevier</strong>. Historically failed to scale; low yields on marginal land.</>}
                                             {saf.id === 'algae' && <><strong>US DoE</strong>. Projected scalable open-pond systems.</>}
-                                            {saf.id === 'efuel' && <><strong>KIT</strong>. Theoretical max based on PV efficiency in high-irradiance zones.</>}
+                                            {saf.id === 'efuel' && <><strong>UBA / Schmidt et al.</strong>. Temperate Zone (Europe) baseline. Deserts can yield &gt;100,000 L/ha.</>}
                                         </td>
                                     </tr>
                                 ))}

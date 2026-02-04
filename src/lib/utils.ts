@@ -74,7 +74,7 @@ export const SAF_TYPES = [
     emoji: '☀️',
     description: 'Synthetic kerosene made from renewable electricity and CO2. Extremely land-efficient.',
     harvestFrequency: 'Requires 1 year of solar output',
-    priceMultiplier: 4.0 // Avg of 3.0-5.0
+    priceMultiplier: 13.0 // Updated to 13x based on Aerospace Global source
   }
 ] as const;
 
