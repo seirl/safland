@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BookOpen, Battery, Globe, Leaf, Sun, AlertTriangle, ExternalLink, ChevronDown, ChevronUp } from 'lucide-react';
+import { BookOpen, Battery, Globe, Leaf, Sun, AlertTriangle, ExternalLink, ChevronDown, ChevronUp, Wind, Fuel } from 'lucide-react';
 import { 
     FUEL_CONSUMPTION_L_PER_100KM_PAX, 
     GLOBAL_AVIATION_FUEL_CONSUMPTION_L_PER_YEAR, 
@@ -55,6 +55,24 @@ export default function FactSheet() {
         </p>
       </div>
 
+      {/* Section: Global Impact */}
+      <section className="space-y-4">
+        <h3 className="text-xl font-bold text-stone-800 flex items-center gap-2">
+          <Globe className="w-5 h-5 text-emerald-600" />
+          Aviation's Footprint
+        </h3>
+        <ul className="space-y-3 text-sm text-stone-600">
+          <li className="flex gap-3">
+            <span className="font-bold text-stone-900 min-w-[3rem]">2.5%</span>
+            <span>of global CO₂ emissions come from aviation.</span>
+          </li>
+          <li className="flex gap-3">
+            <span className="font-bold text-stone-900 min-w-[3rem]">Top 6</span>
+            <span>If aviation were a country, it would be the 6th largest emitter in the world, between Japan and Germany.</span>
+          </li>
+        </ul>
+      </section>
+
       {/* Section 1: The Hard Truth */}
       <section className="space-y-4">
         <h3 className="text-xl font-bold text-stone-800 flex items-center gap-2">
@@ -104,23 +122,7 @@ export default function FactSheet() {
         </p>
       </section>
 
-      {/* Section 4: Global Impact */}
-      <section className="space-y-4">
-        <h3 className="text-xl font-bold text-stone-800 flex items-center gap-2">
-          <Globe className="w-5 h-5 text-emerald-600" />
-          Aviation's Footprint
-        </h3>
-        <ul className="space-y-3 text-sm text-stone-600">
-          <li className="flex gap-3">
-            <span className="font-bold text-stone-900 min-w-[3rem]">2.5%</span>
-            <span>of global CO₂ emissions come from aviation.</span>
-          </li>
-          <li className="flex gap-3">
-            <span className="font-bold text-stone-900 min-w-[3rem]">Top 6</span>
-            <span>If aviation were a country, it would be the 6th largest emitter in the world, between Japan and Germany.</span>
-          </li>
-        </ul>
-      </section>
+
 
       {/* Section 5: The Land Use Challenge */}
       <section className="space-y-4">
@@ -203,11 +205,84 @@ export default function FactSheet() {
       <section className="space-y-4">
         <h3 className="text-xl font-bold text-stone-800 flex items-center gap-2">
           <Sun className="w-5 h-5 text-cyan-600" />
-          The E-Fuel Promise (Power-to-Liquid)
+          The E-Fuel Pathway (Power-to-Liquid)
         </h3>
         <p className="text-sm text-stone-600">
             E-fuels are synthetic kerosene made by combining hydrogen (from water + renewable electricity) with captured CO₂.
         </p>
+
+        {/* Process Visualization */}
+        <div className="flex items-center justify-center py-6 max-w-xl mx-auto w-full">
+            
+            {/* Inputs Column */}
+            <div className="flex flex-col gap-6">
+                {/* Top Branch: H2 */}
+                <div className="flex items-center gap-3">
+                     <div className="flex flex-col items-center gap-1">
+                        <div className="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600 shadow-sm border border-yellow-200">
+                            <Sun className="w-5 h-5" />
+                        </div>
+                        <span className="text-[9px] font-bold text-stone-500 uppercase">Solar</span>
+                     </div>
+                     <div className="w-4 h-0.5 bg-stone-300"></div>
+                     <div className="flex flex-col items-center gap-1">
+                        <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 shadow-sm border border-blue-200">
+                            <div className="text-xs font-bold">H₂</div>
+                        </div>
+                        <span className="text-[9px] font-bold text-stone-500 uppercase">Electrolysis</span>
+                     </div>
+                </div>
+
+                {/* Bottom Branch: CO2 */}
+                <div className="flex items-center gap-3">
+                     <div className="flex flex-col items-center gap-1">
+                        <div className="w-10 h-10 rounded-full bg-stone-100 flex items-center justify-center text-stone-500 shadow-sm border border-stone-200">
+                            <Wind className="w-5 h-5" />
+                        </div>
+                        <span className="text-[9px] font-bold text-stone-500 uppercase">Air</span>
+                     </div>
+                     <div className="w-4 h-0.5 bg-stone-300"></div>
+                     <div className="flex flex-col items-center gap-1">
+                        <div className="w-10 h-10 rounded-full bg-stone-200 flex items-center justify-center text-stone-700 shadow-sm border border-stone-300">
+                            <div className="text-xs font-bold">CO₂</div>
+                        </div>
+                        <span className="text-[9px] font-bold text-stone-500 uppercase">DAC</span>
+                     </div>
+                </div>
+            </div>
+
+            {/* Connector Lines */}
+            <div className="flex items-center">
+                {/* Fork */}
+                <div className="flex flex-col h-16 justify-center">
+                    <div className="w-6 h-1/2 border-t-2 border-r-2 border-stone-300 rounded-tr-xl"></div>
+                    <div className="w-6 h-1/2 border-b-2 border-r-2 border-stone-300 rounded-br-xl"></div>
+                </div>
+                
+                {/* Line to Synthesis */}
+                <div className="w-4 h-0.5 bg-stone-300"></div>
+            </div>
+
+            {/* Synthesis & Output */}
+            <div className="flex items-center gap-3">
+                <div className="flex flex-col items-center gap-1">
+                    <div className="w-12 h-12 rounded-full bg-cyan-100 flex items-center justify-center text-cyan-600 shadow-sm border border-cyan-200 z-10 bg-white">
+                        <div className="text-xs font-bold">PtL</div>
+                    </div>
+                    <span className="text-[10px] font-bold text-stone-600 uppercase tracking-wide">Synthesis</span>
+                </div>
+
+                <div className="w-4 h-0.5 bg-stone-300"></div>
+
+                <div className="flex flex-col items-center gap-1">
+                    <div className="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 shadow-sm border border-emerald-200">
+                        <Fuel className="w-6 h-6" />
+                    </div>
+                    <span className="text-[10px] font-bold text-stone-600 uppercase tracking-wide">Jet Fuel</span>
+                </div>
+            </div>
+
+        </div>
         
         <div className="flex flex-col gap-4 mt-2">
             <div className="bg-stone-50 p-4 rounded-lg border border-stone-200">
@@ -353,7 +428,7 @@ export default function FactSheet() {
                                         <td className="py-2 opacity-80 text-xs">
                                             {saf.id === 'corn' && <><strong>Uddin et al. (2025)</strong>. Higher energy intensity than HEFA.</>}
                                             {['soybean', 'rapeseed', 'palm'].includes(saf.id) && <><strong>NREL (2024)</strong>. Range $1.85-$4.00/gal depending on feedstock.</>}
-                                            {saf.id === 'jatropha' && <><strong>Elsevier</strong>.</>}
+                                            {saf.id === 'jatropha' && <><strong>Singh et al. (2014)</strong>.</>}
                                             {saf.id === 'algae' && <><strong>US DoE</strong>. Pre-commercial/Pilot cost basis.</>}
                                             {saf.id === 'efuel' && <><strong>Aerospace Global</strong>. High green premium due to electrolysis costs.</>}
                                         </td>
