@@ -453,7 +453,10 @@ export default function FactSheet() {
         </h3>
         <div className="prose prose-stone text-sm leading-relaxed text-stone-600">
             <p className="text-xs italic">
-                Built by <a href="https://antoinepietri.fr/" target="_blank" rel="noopener noreferrer" className="underline hover:text-emerald-600">Antoine Pietri</a> as an educational prototype. No conflict of interest or affiliation with energy companies.
+                Built by <a href="https://antoinepietri.fr/" target="_blank" rel="noopener noreferrer" className="underline hover:text-emerald-600">Antoine Pietri</a> as an educational prototype. <a href="https://github.com/seirl/safland" target="_blank" rel="noopener noreferrer" className="underline hover:text-emerald-600">Source code available on GitHub</a>. No conflict of interest or affiliation with energy companies.
+            </p>
+            <p className="text-xs italic mt-2">
+                Code assisted by AI. All data, formulas, and assumptions were manually researched and verified against primary sources. Not peer-reviewed, do not refer to this website as a primary academic source.
             </p>
         </div>
       </section>
